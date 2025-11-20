@@ -168,17 +168,30 @@
     text-align: left;
   }
 
+  .left {
+    flex: 0 0 auto;
+  }
+
   .right {
     display: flex;
+    flex-direction: column;
     align-items: center;
     gap: 0.5rem;
+    flex: 0 0 auto;
   }
+
   .contactBtn {
     font-size: 0.75rem;
     padding: 0.5rem 1rem;
+    white-space: normal;
+    max-width: 80px;
+    line-height: 1.2;
   }
+
   .contactBtnRU {
-    padding: 0.4rem 0.75rem;
-    font-size: 0.68rem;
+    padding: 0.4rem 0.5rem;
+    font-size: 0.65rem;
+    max-width: 70px;
+    white-space: normal;
   }
 }
