@@ -23,9 +23,9 @@ export const projects: Project[] = [
     id: 'ivintrade',
     titleRu: 'IvinTrade',
     titleEn: 'IvinTrade',
-    descriptionRu: 'FinTech платформа для криптовалютных платежей и обмена. Надёжное решение для управления цифровыми активами с интегрированной системой безопасности.',
-    descriptionEn: 'FinTech platform for cryptocurrency payments and exchange. Secure solution for digital asset management with integrated security system.',
-    technologies: ['Crypto', 'Payment Processing', 'Security', 'FinTech'],
+    descriptionRu: 'Сайт для FinTech платформы для криптовалютных платежей и обмена.',
+    descriptionEn: 'Website for FinTech platform for cryptocurrency payments and exchange.',
+    technologies: ['HTML', 'CSS', 'JavaScript', 'Responsive Design', 'FinTech'],
     demoUrl: 'https://ivintrade.kg',
   },
 ];

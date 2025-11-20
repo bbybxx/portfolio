@@ -16,15 +16,10 @@ const Hero = ({ translations }: HeroProps) => {
   const [isSwitching, setIsSwitching] = useState(false);
 
   useEffect(() => {
-    const newWords = translations.hero.title.split(' ');
-    if (newWords.join(' ') === displayWords.join(' ')) return;
-    // Add a short fade-out and fade-in to smooth switch
+    // Reset words immediately to prevent flicker of old language
+    setDisplayWords(translations.hero.title.split(' '));
     setIsSwitching(true);
-    const t = setTimeout(() => {
-      setDisplayWords(newWords);
-      // small delay so new words can animate in
-      setTimeout(() => setIsSwitching(false), 40);
-    }, 160);
+    const t = setTimeout(() => setIsSwitching(false), 200);
     return () => clearTimeout(t);
   }, [translations.hero.title]);
 
