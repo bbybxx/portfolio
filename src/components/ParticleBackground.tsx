@@ -33,7 +33,8 @@ export default function ParticleBackground() {
     window.addEventListener('resize', handleResize);
 
     // Create particles
-    const particleCount = Math.min(50, Math.max(30, Math.floor(window.innerWidth / 30)));
+    const isSmall = window.innerWidth <= 768;
+    const particleCount = isSmall ? Math.min(30, Math.max(12, Math.floor(window.innerWidth / 35))) : Math.min(50, Math.max(30, Math.floor(window.innerWidth / 30)));
     const particles: Particle[] = [];
 
     for (let i = 0; i < particleCount; i++) {
@@ -50,9 +51,8 @@ export default function ParticleBackground() {
 
     // Animation loop
     const animate = () => {
-      // Clear with minimal redraw
-      ctx.fillStyle = 'rgba(17, 24, 39, 0.08)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      // Clear full canvas (no persistent trails) - avoids "screen filling"
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       const particles = particlesRef.current;
 
@@ -84,19 +84,19 @@ export default function ParticleBackground() {
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
         ctx.fill();
 
-        // Draw connections to all nearby particles (not just alternating)
+        // Draw connections to nearby particles (limit checks)
         for (let j = index + 1; j < particles.length; j++) {
           const other = particles[j];
           const dx = other.x - particle.x;
           const dy = other.y - particle.y;
           const distSq = dx * dx + dy * dy;
-          const distLimit = 15000; // ~122px
+          const distLimit = canvas.width <= 768 ? 6000 : 9000; // smaller limit for fewer lines on mobile
 
           if (distSq < distLimit) {
             const dist = Math.sqrt(distSq);
-            const opacity = Math.max(0, 0.1 * (1 - dist / 122));
+            const opacity = Math.max(0, 0.06 * (1 - dist / Math.sqrt(distLimit)));
             ctx.strokeStyle = `rgba(59, 130, 246, ${opacity})`;
-            ctx.lineWidth = 1;
+            ctx.lineWidth = 0.8;
             ctx.beginPath();
             ctx.moveTo(particle.x, particle.y);
             ctx.lineTo(other.x, other.y);

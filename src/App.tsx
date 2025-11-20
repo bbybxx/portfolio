@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Header from './components/Header';
 import ParticleBackground from './components/ParticleBackground';
 import BackgroundEffects from './components/BackgroundEffects';
+import Spotlight from './components/Spotlight';
 import Hero from './components/Hero';
 import Projects from './components/Projects';
 import About from './components/About';
@@ -27,6 +28,7 @@ const App = () => {
   return (
     <div className="app">
       <BackgroundEffects />
+      <Spotlight />
       <Header
         language={language}
         translations={translations}
