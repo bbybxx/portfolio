@@ -1,0 +1,27 @@
+.footer {
+  padding: 2rem;
+  background-color: rgba(17, 24, 39, 0.95);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.text {
+  color: #9ca3af;
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 1.5rem;
+  }
+
+  .text {
+    font-size: 0.75rem;
+  }
+}
