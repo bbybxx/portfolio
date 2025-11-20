@@ -1,4 +1,5 @@
 import styles from './Header.module.css';
+import langStyles from './LanguageToggle.module.css';
 import type { Language, Translations } from '../types/index';
 
 interface HeaderProps {
@@ -27,16 +28,16 @@ const Header = ({
             {translations.header.contactBtn}
           </button>
 
-          <div className={styles.languageToggle}>
+          <div className={langStyles.languageToggle}>
             <button
-              className={`${styles.langBtn} ${language === 'ru' ? styles.active : ''}`}
+              className={`${langStyles.langBtn} ${language === 'ru' ? langStyles.active : ''}`}
               onClick={() => onLanguageChange('ru')}
             >
               РУ
             </button>
-            <span className={styles.separator}>|</span>
+            <span className={langStyles.separator}>|</span>
             <button
-              className={`${styles.langBtn} ${language === 'en' ? styles.active : ''}`}
+              className={`${langStyles.langBtn} ${language === 'en' ? langStyles.active : ''}`}
               onClick={() => onLanguageChange('en')}
             >
               EN

@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import Header from './components/Header';
+import ParticleBackground from './components/ParticleBackground';
+import BackgroundEffects from './components/BackgroundEffects';
 import Hero from './components/Hero';
 import Projects from './components/Projects';
 import About from './components/About';
@@ -10,7 +12,7 @@ import type { Language } from './types/index';
 import './App.css';
 
 const App = () => {
-  const [language, setLanguage] = useState<Language>('en');
+  const [language, setLanguage] = useState<Language>('ru');
   const translations = getTranslation(language);
 
   const handleLanguageChange = (lang: Language) => {
@@ -24,6 +26,7 @@ const App = () => {
 
   return (
     <div className="app">
+      <BackgroundEffects />
       <Header
         language={language}
         translations={translations}
@@ -31,9 +34,10 @@ const App = () => {
         onContactClick={handleContactClick}
       />
       <main>
+        <ParticleBackground />
         <Hero translations={translations} />
-        <Projects language={language} translations={translations} />
         <About translations={translations} />
+        <Projects language={language} translations={translations} />
         <Contact translations={translations} />
       </main>
       <Footer language={language} />

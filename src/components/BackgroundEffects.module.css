@@ -1,0 +1,117 @@
+.orb1 {
+  position: fixed;
+  top: -10%;
+  right: -5%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, rgba(59, 130, 246, 0.1) 30%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+  filter: blur(50px);
+  animation: float1 12s ease-in-out infinite;
+}
+
+.orb2 {
+  position: fixed;
+  bottom: -5%;
+  left: -10%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(96, 165, 250, 0.25) 0%, transparent 60%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+  filter: blur(50px);
+  animation: float2 14s ease-in-out infinite reverse;
+}
+
+.orb3 {
+  position: fixed;
+  top: 30%;
+  left: -8%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.25) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+  filter: blur(60px);
+  animation: float3 16s ease-in-out infinite;
+}
+
+.orb4 {
+  position: fixed;
+  bottom: 20%;
+  right: -8%;
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.2) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+  filter: blur(55px);
+  animation: float4 18s ease-in-out infinite reverse;
+}
+
+@keyframes float1 {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    transform: translateY(40px) translateX(-20px);
+  }
+}
+
+@keyframes float2 {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    transform: translateY(-40px) translateX(20px);
+  }
+}
+
+@keyframes float3 {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    transform: translateY(30px) translateX(15px);
+  }
+}
+
+@keyframes float4 {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    transform: translateY(-50px) translateX(-25px);
+  }
+}
+
+@media (max-width: 768px) {
+  .orb1, .orb2, .orb3, .orb4 {
+    filter: blur(40px);
+  }
+
+  .orb1 {
+    width: 400px;
+    height: 400px;
+  }
+
+  .orb2 {
+    width: 350px;
+    height: 350px;
+  }
+
+  .orb3 {
+    width: 300px;
+    height: 300px;
+  }
+
+  .orb4 {
+    width: 320px;
+    height: 320px;
+  }
+}

@@ -26,6 +26,26 @@ html {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  position: relative;
+  background-color: #111827;
+}
+
+.app > header {
+  position: relative;
+  z-index: 100;
+  background-color: #111827;
+}
+
+.app > main {
+  flex: 1;
+  position: relative;
+  z-index: 2;
+}
+
+.app > footer {
+  position: relative;
+  z-index: 10;
+  background-color: #111827;
 }
 
 main {
