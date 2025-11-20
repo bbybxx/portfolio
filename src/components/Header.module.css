@@ -2,28 +2,15 @@
   position: sticky;
   top: 0;
   z-index: 1000;
-  --tilt-x: 0deg;
-  --tilt-y: 0deg;
-  transform: perspective(900px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
-  transform-origin: center top;
-  transition: transform 180ms ease-out, padding 240ms ease, backdrop-filter 240ms ease;
   background-color: rgba(17, 24, 39, 0.85);
-  backdrop-filter: blur(10px) saturate(120%);
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   padding: 0.7rem 0;
-  animation: headerIntro 560ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-@keyframes headerIntro {
-  from {
-    transform: translateY(-12px) scale(0.995) rotateX(0deg) rotateY(0deg);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0) scale(1) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
-    opacity: 1;
-  }
-}
+/* data attribute selector fallback — keep header hidden via a class-like attribute */
+/* Header intentionally static — no hide/show or translate */
+
+/* Removed headerIntro animation */
 
 .container {
   max-width: 1200px;
@@ -54,17 +41,6 @@
   border-radius: 50%;
   background: radial-gradient(circle, #60a5fa, #3b82f6);
   box-shadow: 0 0 12px rgba(59,130,246,0.7);
-  transform: translateY(0);
-  transition: transform 260ms ease, box-shadow 260ms ease;
-}
-
-.accent:hover {
-  transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 0 18px rgba(59,130,246,0.9);
-}
-
-.accent {
-  animation: accentPulse 3.5s ease-in-out infinite;
 }
 
 @keyframes accentPulse {
@@ -92,6 +68,19 @@
   gap: 1.5rem;
 }
 
+/* Mobile toggle button (hidden on desktop) */
+.left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
 .contactBtn {
   padding: 0.75rem 1.5rem;
   background-color: #3b82f6;
@@ -101,78 +90,17 @@
   font-size: 0.875rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
-  animation: contactPulse 2s ease 0.6s both;
 }
 
-.contactBtn:hover {
-  background-color: #2563eb;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 16px rgba(59, 130, 246, 0.3);
+/* Russian variant: smaller to avoid overlap */
+.contactBtnRU {
+  padding: 0.45rem 0.85rem;
+  font-size: 0.78rem;
 }
 
-@keyframes contactPulse {
-  0% { transform: translateY(0) scale(1); box-shadow: 0 0 0 rgba(59,130,246,0); }
-  50% { transform: translateY(-2px) scale(1.02); box-shadow: 0 10px 30px rgba(59,130,246,0.15); }
-  100% { transform: translateY(0) scale(1); box-shadow: 0 0 0 rgba(59,130,246,0); }
-}
+/* contactPulse removed */
 
-@media (max-width: 768px) {
-  .header {
-    padding: 0.7rem 0;
-  }
-
-  .container {
-    flex-direction: column;
-    gap: 0.6rem;
-    padding: 0 1rem;
-  }
-
-  .logo {
-    align-items: center;
-  }
-
-  .logo h1 {
-    font-size: 1.125rem;
-    text-align: center;
-  }
-
-  .nav {
-    width: 100%;
-    justify-content: space-between;
-  }
-
-  .contactBtn {
-    font-size: 0.75rem;
-    padding: 0.5rem 1rem;
-  }
-}
-
-/* Shrunk header state */
-.shrunk {
-  padding: 0.35rem 0 !important;
-  background-color: rgba(17, 24, 39, 0.96);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-}
-
-.hidden {
-  transform: translateY(-120%);
-  opacity: 0;
-  pointer-events: none;
-}
-
-.shrunk .logo h1 {
-  font-size: 1.125rem;
-}
-
-.shrunk .logo p {
-  font-size: 0.75rem;
-}
-
-.shrunk .contactBtn {
-  padding: 0.4rem 0.9rem;
-  font-size: 0.72rem;
-}
+/* Removed header-specific responsive rules — header layout is intentionally static */
 
 /* subtle animated gradient behind header - pseudo element */
 .header::before {
@@ -200,17 +128,57 @@
   transform: skewX(-15deg);
   filter: blur(8px);
   opacity: 0.6;
-  animation: headerGlint 2.6s ease-out 1 forwards 0.2s;
+  /* glint animation removed */
 }
 
-@keyframes headerGlint {
-  0% { left: -40%; opacity: 0; }
-  50% { left: 30%; opacity: 0.6; }
-  100% { left: 120%; opacity: 0; }
-}
+/* headerGlint removed */
 
 @keyframes headerGradient {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 0.7rem 0;
+  }
+
+  .container {
+    flex-direction: row;
+    align-items: center;
+    padding: 0 1rem;
+    position: relative;
+    justify-content: space-between;
+  }
+
+  .logo {
+    display: block;
+  }
+
+  /* Center the logo in the header on mobile while keeping controls left/right */
+  .logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .logo h1 {
+    font-size: 1rem;
+    text-align: left;
+  }
+
+  .right {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .contactBtn {
+    font-size: 0.75rem;
+    padding: 0.5rem 1rem;
+  }
+  .contactBtnRU {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.68rem;
+  }
 }

@@ -35,9 +35,12 @@ export default function ParticleBackground() {
     // Create particles
     const isSmall = window.innerWidth <= 768;
     const particleCount = isSmall ? Math.min(30, Math.max(12, Math.floor(window.innerWidth / 35))) : Math.min(50, Math.max(30, Math.floor(window.innerWidth / 30)));
+    const targetCount = particleCount;
     const particles: Particle[] = [];
 
-    for (let i = 0; i < particleCount; i++) {
+    // Start minimal and ramp up to targetCount to avoid heavy initial paint
+    const initialCount = Math.min(10, targetCount);
+    for (let i = 0; i < initialCount; i++) {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
@@ -49,8 +52,42 @@ export default function ParticleBackground() {
     }
     particlesRef.current = particles;
 
+    // Ramp up particles to targetCount over 3s
+    let rampTimer: number | null = null;
+    if (targetCount > initialCount) {
+      const steps = targetCount - initialCount;
+      const interval = Math.max(12, Math.floor(3000 / steps));
+      let added = 0;
+      rampTimer = window.setInterval(() => {
+        if (added >= steps) {
+          if (rampTimer) clearInterval(rampTimer);
+          return;
+        }
+        particlesRef.current.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          size: Math.random() * 2.5 + 1,
+          opacity: Math.random() * 0.6 + 0.2,
+          vx: (Math.random() - 0.5) * 0.4,
+          vy: (Math.random() - 0.5) * 0.4,
+        });
+        added += 1;
+      }, interval);
+    }
+
+    // Respect prefers-reduced-motion and page visibility to reduce CPU usage
+    const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let isVisible = true;
+    const handleVisibility = () => { isVisible = document.visibilityState === 'visible'; };
+    document.addEventListener('visibilitychange', handleVisibility);
+
     // Animation loop
     const animate = () => {
+      if (!isVisible || prefersReducedMotion) {
+        // Skip heavy animation when minimized or user prefers reduced motion
+        animationRef.current = requestAnimationFrame(animate);
+        return;
+      }
       // Clear full canvas (no persistent trails) - avoids "screen filling"
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -112,6 +149,8 @@ export default function ParticleBackground() {
 
     return () => {
       window.removeEventListener('resize', handleResize);
+      document.removeEventListener('visibilitychange', handleVisibility);
+      if (rampTimer) clearInterval(rampTimer);
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
       }

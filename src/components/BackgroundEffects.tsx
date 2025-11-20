@@ -7,6 +7,8 @@ export default function BackgroundEffects() {
       <div className={styles.orb2}></div>
       <div className={styles.orb3}></div>
       <div className={styles.orb4}></div>
+      <div className={styles.orb5}></div>
+      <div className={styles.orb6}></div>
     </>
   );
 }
