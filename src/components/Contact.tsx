@@ -127,7 +127,7 @@ const Contact = ({ translations }: ContactProps) => {
             <a href="https://wa.me/79198494768" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className={`${styles.iconBtn} ${styles.whatsapp}`} title="WhatsApp">
               <i className="fab fa-whatsapp"></i>
             </a>
-            <a href="https://discord.com" target="_blank" rel="noopener noreferrer" className={`${styles.iconBtn} ${styles.discord}`} aria-label="Discord" title="Discord">
+            <a href="https://discord.com/users/715290260564869130" target="_blank" rel="noopener noreferrer" className={`${styles.iconBtn} ${styles.discord}`} aria-label="Discord" title="Discord">
               <i className="fab fa-discord"></i>
             </a>
           </div>
